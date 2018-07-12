@@ -1,0 +1,48 @@
+$relative-font-size: 15px !default;
+@function strip-unit($num) {
+  @return $num / ($num * 0 + 1);
+}
+
+@function rem($value) {
+  $v: strip-unit($value);
+  $relative: strip-unit($relative-font-size);
+  @return $v/$relative+rem;
+}
+
+$relative-font-size: 15px;
+@function remPx($value) {
+  @return $value * $relative-font-size;
+}
+
+$header-height:rem(53);
+@mixin flex {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+@mixin justify-content($shadow...) {
+  -webkit-justify-content: $shadow;
+  -moz-justify-content: $shadow;
+  -ms-justify-content: $shadow;
+  -o-justify-content: $shadow;
+  justify-content: $shadow;
+}
+
+@mixin align-items($layout...) {
+  -webkit-align-items: $layout;
+  -moz-align-items: $layout;
+  -ms-align-items: $layout;
+  -o-align-items: $layout;
+  align-items: $layout;
+}
+
+@mixin box-sizing($borderBox...) {
+  -webkit-box-sizing: $borderBox;
+  -moz-box-sizing: $borderBox;
+  box-sizing: $borderBox;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}

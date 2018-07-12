@@ -1,0 +1,9 @@
+{
+  "name": "suoyin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "better-scroll": "^1.12.4"
+  }
+}

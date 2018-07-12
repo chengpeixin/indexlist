@@ -1,0 +1,207 @@
+input[type=search]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+    @charset"utf-8";
+    html {
+      color: #000;
+      background: #fff;
+      overflow-y: scroll;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    html * {
+      outline: 0;
+      -webkit-text-size-adjust: none;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+    }
+
+    body,
+    html {
+      font-family: "微软雅黑";
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    article,
+    aside,
+    blockquote,
+    body,
+    button,
+    code,
+    dd,
+    details,
+    div,
+    dl,
+    dt,
+    fieldset,
+    figcaption,
+    figure,
+    footer,
+    form,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    header,
+    hgroup,
+    hr,
+    input,
+    legend,
+    li,
+    menu,
+    nav,
+    ol,
+    p,
+    pre,
+    section,
+    td,
+    textarea,
+    th,
+    ul {
+      margin: 0;
+      padding: 0
+    }
+
+    input,
+    select,
+    textarea {
+      font-size: 100%
+    }
+
+    input,
+    textarea {
+      outline: none;
+      border: none;
+      resize: none;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0
+    }
+
+    fieldset,
+    img {
+      border: 0;
+      /* display: block; */
+    }
+
+    abbr,
+    acronym {
+      border: 0;
+      font-variant: normal
+    }
+
+    del {
+      text-decoration: line-through
+    }
+
+    address,
+    caption,
+    cite,
+    code,
+    dfn,
+    em,
+    th,
+    var {
+      font-style: normal;
+      font-weight: 500
+    }
+
+    ol,
+    ul,
+    li {
+      list-style: none
+    }
+
+    caption,
+    th {
+      text-align: left
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: 100%;
+      font-weight: 500
+    }
+
+    q:after,
+    q:before {
+      content: ''
+    }
+
+    sub,
+    sup {
+      font-size: 75%;
+      line-height: 0;
+      position: relative;
+      vertical-align: baseline
+    }
+
+    sup {
+      top: -.5em
+    }
+
+    sub {
+      bottom: -.25em
+    }
+
+    a:hover {
+      text-decoration: underline
+    }
+
+    a,
+    ins {
+      text-decoration: none
+    }
+
+    .clearfix:after {
+      content: ".";
+      clear: both;
+      display: block;
+      height: 0;
+      overflow: hidden;
+      visibility: hidden
+    }
+
+    .small-font {
+      font-size: 20px;
+      transform: scale(0.50);
+      transform-origin: 0 0;
+      -ms-transform: scale(0.50);
+      -ms-transform-origin: 0 0;
+      -webkit-transform: scale(0.50);
+      -webkit-transform-origin: 0 0;
+      -moz-transform: scale(0.50);
+      -moz-transform-origin: 0 0;
+      -o-transform: scale(0.50);
+      -o-transform-origin: 0 0
+    }
+
+    .left {
+      float: left;
+    }
+
+    .right {
+      float: right;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+    }
