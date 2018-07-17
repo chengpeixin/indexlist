@@ -98,7 +98,7 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   // Override the current require with this new one
   return newRequire;
-})({14:[function(require,module,exports) {
+})({5:[function(require,module,exports) {
 !function (win) {
   function resize() {
     var domWidth = domEle.getBoundingClientRect().width;
@@ -229,7 +229,7 @@ module.exports = reloadCSS;
         module.hot.dispose(reloadCSS);
         module.hot.accept(reloadCSS);
       
-},{"_css_loader":6}],13:[function(require,module,exports) {
+},{"_css_loader":6}],11:[function(require,module,exports) {
 module.exports = {
   "code": 0,
   "data": {
@@ -1826,7 +1826,7 @@ module.exports = {
   "subcode": 0
 }
 ;
-},{}],12:[function(require,module,exports) {
+},{}],9:[function(require,module,exports) {
 'use strict';
 
 var _FeHelper = require('./../json/FeHelper.json');
@@ -1875,7 +1875,7 @@ data.forEach(function (item, index) {
   }
   map[key].items.push(new Singer({
     id: item.Fsinger_mid,
-    name: item.Fother_name
+    name: item.Fother_name == "" ? "不知道名称" : item.Fother_name
   }));
 }, undefined);
 // 为了得到有序列表，我们需要处理 map
@@ -1894,7 +1894,7 @@ ret.sort(function (a, b) {
 });
 list = hot.concat(ret);
 module.exports = list;
-},{"./../json/FeHelper.json":13}],17:[function(require,module,exports) {
+},{"./../json/FeHelper.json":11}],10:[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -5196,6 +5196,15 @@ infiniteMixin(BScroll);
 BScroll.Version = '1.12.4';
 
 exports.default = BScroll;
+},{}],12:[function(require,module,exports) {
+module.exports = {
+  warn: function warn(text) {
+    console.warn(text);
+  },
+  error: function error(text) {
+    console.error(text);
+  }
+};
 },{}],8:[function(require,module,exports) {
 'use strict';
 
@@ -5207,20 +5216,19 @@ var _betterScroll = require('better-scroll');
 
 var _betterScroll2 = _interopRequireDefault(_betterScroll);
 
+var _util = require('./util');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function warn(text) {
-  console.warn(text);
-}
-
-function error(text) {
-  console.error(text);
-}
 
 function listView(opts) {
   this.el = opts['el'];
+  this.data = opts['data'];
   this.opts = opts['config'];
-  this.Bscroll = _betterScroll2.default;
+  this._scrollTitle = null;
+  this._indexDom = null;
+  this.touch = {};
+  this.ANCHOR_HEIGHT = 'number';
+  this.init();
 }
 
 listView.prototype = {
@@ -5231,16 +5239,72 @@ listView.prototype = {
   render: function render() {
     var el = document.querySelector(this.el);
     if (el) {
-      this.scroll = new this.Bscroll(el, {});
+      var dom = '';
+      var ShortcutIndex = [];
+      var ShortcutDom = '';
+      this.data.forEach(function (v, i) {
+        var title = '<h2 class="scrollTitle">' + v.title + '</h2>';
+        ShortcutIndex.push(v.title.substr(0, 1));
+        ShortcutDom += '<li data-index="' + i + '" class="scroll-index">' + v.title.substr(0, 1) + '</li>';
+        var li = '';
+        v.items.forEach(function (item, index) {
+          li += '<li><img src="' + item.avatar + '"><span>' + item.name + '</span></li>';
+        });
+        var ul = '<ul>' + li + '</ul>';
+        var str = '<li>' + title + ul + '</li>';
+        dom += str;
+      });
+      $('#wrapper ul').html(dom);
+      $('.indexlist').html(ShortcutDom);
+      this._scrollTitle = document.querySelectorAll('.scrollTitle');
+      this._indexDom = document.querySelectorAll('.scroll-index');
+      this.ANCHOR_HEIGHT = $('.scroll-index').eq(0).height();
+      this.scroll = new _betterScroll2.default(el, {});
+      this.addEvent();
     } else {
-      error('\u5FC5\u987B\u4F20\u5165\u5DF2\u5B58\u5728\u7684DOM\u5143\u7D20');
+      (0, _util.error)('\u5FC5\u987B\u4F20\u5165\u5DF2\u5B58\u5728\u7684DOM\u5143\u7D20');
     }
+  },
+  addEvent: function addEvent() {
+    var that = this;
+    $('.indexlist').on('touchstart', '.scroll-index', onShortcuttouchstar);
+    $('.indexlist').on('touchmove', '.scroll-index', onShortcuttouchmove);
+
+    function onShortcuttouchstar(e) {
+      var firstTouch = e.touches[0];
+      var index = $(this).data('index');
+      var scrollToDom = that._scrollTitle[index];
+      that.touch.anchorIndex = index;
+      that.touch.y1 = firstTouch.pageY;
+      that.scroll.scrollToElement(scrollToDom);
+    }
+
+    function onShortcuttouchmove(e) {
+      var firstTouch = e.touches[0];
+      that.touch.y2 = firstTouch.pageY;
+      var delta = (that.touch.y2 - that.touch.y1) / that.ANCHOR_HEIGHT | 0;
+      var anchorIndex = that.touch.anchorIndex + delta;
+      that._scrollTo(anchorIndex);
+    }
+  },
+  _scrollTo: function _scrollTo(index) {
+    if (!index && index !== 0) return;
+    if (index < 0) {
+      index = 0;
+    } else if (index > this._scrollTitle.length - 2) {
+      index = this._scrollTitle.length - 2;
+    }
+    this.scrollY = -this._scrollTitle[index];
+    this.scroll.scrollToElement(this._scrollTitle[index]);
   }
 };
+var config = {
+  el: "#wrapper",
+  data: _data2.default
 
-var list = new listView("#wrappear");
-list.init();
-},{"./data":12,"better-scroll":17}],2:[function(require,module,exports) {
+  // 加入dom元素后初始化
+};var list = new listView(config);
+},{"./data":9,"better-scroll":10,"./util":12}],2:[function(require,module,exports) {
 'use strict';
 
 require('./js/lib/rem');
@@ -5250,7 +5314,7 @@ require('./css/index.css');
 require('./css/flb.css');
 
 require('./js/');
-},{"./js/lib/rem":14,"./css/index.css":3,"./css/flb.css":4,"./js/":8}],19:[function(require,module,exports) {
+},{"./js/lib/rem":5,"./css/index.css":3,"./css/flb.css":4,"./js/":8}],18:[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -5279,7 +5343,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '46559' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '40689' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
@@ -5420,5 +5484,5 @@ function hmrAccept(bundle, id) {
     return hmrAccept(global.parcelRequire, id);
   });
 }
-},{}]},{},[19,2], null)
+},{}]},{},[18,2], null)
 //# sourceMappingURL=/main.9978c24b.map

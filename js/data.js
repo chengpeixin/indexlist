@@ -39,7 +39,7 @@ data.forEach(function (item, index) {
   map[key].items.push(
     new Singer({
       id: item.Fsinger_mid,
-      name: item.Fother_name
+      name: item.Fother_name == "" ? "不知道名称" : item.Fother_name
     })
   )
 }, this)

@@ -1,6 +1,85 @@
 input[type=search]::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
+
+.header {
+  color: #fff;
+  height: 3.06667rem;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 3.06667rem;
+  background: #019ddd;
+}
+
+.body {
+  margin: 0 auto;
+  height: 38.33333rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.body .listview {
+  width: 80%;
+  height: 33.33333rem;
+  margin: 0 auto;
+  margin-top: 2.66667rem;
+  overflow: hidden;
+  border: 0.06667rem solid #999;
+}
+
+.body .listview ul li h2 {
+  color: #fff;
+  height: 2rem;
+  line-height: 2rem;
+  padding-left: 0.4rem;
+  background: #019ddd;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.body .listview ul li ul li {
+  height: 2.26667rem;
+  padding: 0.26667rem 0;
+  line-height: 2.26667rem;
+  font-size: 0.93333rem;
+  color: red;
+  overflow: hidden;
+}
+
+.body .listview ul li ul li img {
+  height: 100%;
+  border-radius: 50%;
+  float: left;
+  margin: 0 0.4rem;
+}
+
+.body .listview ul li ul li span {
+  float: left;
+}
+
+.body .indexlist {
+  position: absolute;
+  top: 2rem;
+  right: 0.4rem;
+}
+
+.body .indexlist li {
+  color: blueviolet;
+  width: 1.46667rem;
+  height: 1.46667rem;
+  text-align: center;
+  line-height: 1.33333rem;
+}
+
+.footer {
+  width: 100%;
+  color: #fff;
+  height: 3.06667rem;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 3.06667rem;
+  background: #019ddd;
+}
     @charset"utf-8";
     html {
       color: #000;
